@@ -1,4 +1,4 @@
-const Buys = require('../../db/models/buys/index');
+const Buy = require('../../db/models/buys/index');
 
 module.exports.getAllBuys = (req, res) => {
   Buy.find().then(result => {
@@ -18,7 +18,12 @@ module.exports.createNewBuy = (req, res) => {
 };
 
 module.exports.changeBuyInfo = (req, res) => {
-  if (req.body.hasOwnProperty('_id') && (req.body.hasOwnProperty('text') || req.body.hasOwnProperty('price') || req.body.hasOwnProperty('date'))) {
+  if (req.body.hasOwnProperty('_id') &&
+    (
+      req.body.hasOwnProperty('text') ||
+      req.body.hasOwnProperty('price') ||
+      req.body.hasOwnProperty('date')
+    )) {
     Buy.updateOne({ _id: req.body._id }, req.body).then(result => {
       Buy.find({ _id: req.body._id }).then(result => {
         res.send({ data: result });
