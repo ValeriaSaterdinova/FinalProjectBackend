@@ -24,6 +24,7 @@ module.exports.changeBuyInfo = (req, res) => {
       req.body.hasOwnProperty('price') ||
       req.body.hasOwnProperty('date')
     )) {
+
     Buy.updateOne({ _id: req.body._id }, req.body).then(result => {
       Buy.find({ _id: req.body._id }).then(result => {
         res.send({ data: result });
